@@ -16,6 +16,9 @@ public static class ServiceCollectionExtensions
         services.AddTransient(typeof(IReposirotyAsync<>), typeof(RepositoryAsync<>));
         services.AddTransient<IValidator<AddCustomerService>, AddCustomerServiceValidations>();
         services.AddTransient<IValidator<UpdateCustomerService>, UpdateCustomerServiceValidations>();
+        services.AddTransient<IProductRepository, ProductRepository>();
+        services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+        services.AddTransient<IProductImageRepository, ProductImageRepository>();
         services.AddTransient<ICustomerRepository, CustomerRepository>();
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IContactNumberRepository, ContactNumberRepository>();

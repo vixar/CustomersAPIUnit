@@ -28,4 +28,4 @@ Esta breve guía ayudará para poder correr el sistema en modo desarrollo.
 
 7- Puede usar la interfaz gráfica de Swagger, o puede utilizar el Cliente REST de su preferencia para comenzar a utilizar el API
 
-Happy Testing :D
+Happy Testing 🤓

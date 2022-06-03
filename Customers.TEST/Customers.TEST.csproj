@@ -24,4 +24,10 @@
       <ProjectReference Include="..\Customers.INFRASTRUCTURE\Customers.INFRASTRUCTURE.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Tests\ProductTests\Endpoints" />
+      <Folder Include="Tests\ProductTests\ProductCategoryTests\Endpoints" />
+      <Folder Include="Tests\ProductTests\ProductImageTests\Endpoints" />
+    </ItemGroup>
+
 </Project>

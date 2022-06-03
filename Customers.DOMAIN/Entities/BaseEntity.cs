@@ -24,8 +24,32 @@ public class BaseEntityGuid: BaseEntity
     public string Id { get; set; } = Guid.NewGuid().ToString();
 }
 
-public class TypeBaseEntity<T> : BaseEntityTiny
+public class TypeBaseEntity : BaseEntityTiny
 {
+    [MaxLength(250)]
     public string Type { get; set; }
+}
+
+public class BaseCategoryEntity : BaseEntityTiny
+{
+    [MaxLength(50)]
+    public string Category { get; set; }
+    [MaxLength(250)]
+    public string Description { get; set; }
+}
+
+public class BaseImageEntity : BaseEntityGuid
+{
+    [MaxLength(250)]
+    public string? Large { get; set; }
+    [MaxLength(250)]
+    public string? Medium { get; set; }
+    [MaxLength(250)]
+    public string? Small { get; set; }
+    [MaxLength(250)]
+    public string Main { get; set; }
+    [MaxLength(250)]
+    public string Description { get; set; }
+    
 }
 
