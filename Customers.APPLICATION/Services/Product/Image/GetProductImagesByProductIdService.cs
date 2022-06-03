@@ -5,28 +5,31 @@ using Application.Repository.Interfaces;
 using AutoMapper;
 using Domain.Entities.Products;
 using Domain.Entities.Types;
+using Newtonsoft.Json;
 
 namespace Application.Services.Product.Image;
 
-public class GetProductImagesService : ProductImageDto, IServiceResponse<ApiResponse.PaginatedResponse<ProductImageDto>>
+public class GetProductImagesByProductIdService : ProductImageDto, IServiceResponse<ApiResponse.PaginatedResponse<ProductImageDto>>
 {
     public int PageNumber { get; set; }
     public int PageSize { get; set; }
+    public string ProductId { get; set; }
 
-    public GetProductImagesService(int pageNumber, int pageSize)
+    public GetProductImagesByProductIdService(string productId, int pageNumber, int pageSize)
     {
+        ProductId = productId;
         PageNumber = pageNumber;
         PageSize = pageSize;
     }
 }
 
-public class GetProductImagesServiceExecutor : IServiceRequest<GetProductImagesService, ApiResponse.PaginatedResponse<ProductImageDto>>
+public class GetProductImagesByProductIdServiceExecutor : IServiceRequest<GetProductImagesByProductIdService, ApiResponse.PaginatedResponse<ProductImageDto>>
 {
     private readonly IProductImageRepository _productImageRepository;
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GetProductImagesServiceExecutor(IProductImageRepository productImageRepository, IMapper mapper, IUnitOfWork unitOfWork)
+    public GetProductImagesByProductIdServiceExecutor(IProductImageRepository productImageRepository, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _productImageRepository = productImageRepository;
         _mapper = mapper;
@@ -36,7 +39,7 @@ public class GetProductImagesServiceExecutor : IServiceRequest<GetProductImagesS
     // TODO: Crear la lógica para retornar un cliente por id
     
     public async Task<ApiResponse.PaginatedResponse<ProductImageDto>> Execute(
-        GetProductImagesService request)
+        GetProductImagesByProductIdService request)
     {
         Expression<Func<ProductImage, ProductImageDto>> expression = e => new ProductImageDto
         {
@@ -54,7 +57,7 @@ public class GetProductImagesServiceExecutor : IServiceRequest<GetProductImagesS
         };
 
         var paginatedList = 
-            await  _productImageRepository.Entities
+            await ( await _productImageRepository.GetProductImages(request.ProductId))
                 .Select(expression)
             .ToPaginatedListAsync(request.PageNumber, request.PageSize);
 

@@ -72,24 +72,5 @@ public class AddCustomerNUnitTest
                 .Create();
         }
     }
-
-    // TODO: Terminar los test
-    // por falta de tiempo no pude implementar los test
-    // [Test, TestCaseSource(nameof(Customer))]
-    // public async Task AddNewCustomer_Return_400_ValidationNotPassed_FieldAreRequired(AddCustomerService customer)
-    // {
-    //     // Arrange
-    //     
-    //     // Act
-    //     
-    //     var result = await _executor.Execute(customer);
-    //     
-    //
-    //     // Assert
-    //     
-    //     Assert.That(result.Succeeded, Is.False);
-    //     Assert.That(result.Data, Is.Not.Null);
-    //     // Assert.That(result.Da);
-    //     
-    // }
+    
 }

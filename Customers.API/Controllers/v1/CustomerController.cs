@@ -10,21 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Customers.API.Controllers.v1;
 
-[ApiController]
 [Route("api/v1/[controller]")]
-public class CustomerController : ControllerBase
+public class CustomerController : BaseApiController<CustomerController>, IBaseApiControllerRepository<String, AddCustomerService, UpdateCustomerService>
 {
     private readonly ICustomerRepository _customerRepository;
-    private readonly IMapper _mapper;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IValidator<AddCustomerService> _addValidator;
     private readonly IValidator<UpdateCustomerService> _updateValidator;
 
-    public CustomerController(ICustomerRepository customerRepository, IMapper mapper, IUnitOfWork unitOfWork, IValidator<AddCustomerService> addValidator, IValidator<UpdateCustomerService> updateValidator)
+    public CustomerController(ICustomerRepository customerRepository,IValidator<AddCustomerService> addValidator, IValidator<UpdateCustomerService> updateValidator)
     {
         _customerRepository = customerRepository;
-        _mapper = mapper;
-        _unitOfWork = unitOfWork;
         _addValidator = addValidator;
         _updateValidator = updateValidator;
     }
@@ -39,6 +34,8 @@ public class CustomerController : ControllerBase
             : BadRequest(result.Message);
     }
     
+
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(string id)
     {
@@ -49,6 +46,7 @@ public class CustomerController : ControllerBase
             ? Ok(result)
             : BadRequest(result.Message);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Post(AddCustomerService customer)
